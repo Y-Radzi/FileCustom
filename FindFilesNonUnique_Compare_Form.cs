@@ -232,7 +232,7 @@ namespace FileCustom
             if (deletedFiles.Count > 0)
             {
                 if (isShowMessageAfterDeleting)
-                    MessageBox.Show($"Files deleted: {Environment.NewLine} {deletedFiles.Display()}");
+                    MessageBox.Show($"Files deleted to recycle bin: {Environment.NewLine} {deletedFiles.Display()}");
                 ifgroupFilesChanged();
             }
             else if (isShowMessageAfterDeleting)

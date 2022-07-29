@@ -51,7 +51,7 @@
             // page_numericUpDown
             // 
             this.page_numericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.page_numericUpDown.Location = new System.Drawing.Point(568, 18);
+            this.page_numericUpDown.Location = new System.Drawing.Point(700, 14);
             this.page_numericUpDown.Name = "page_numericUpDown";
             this.page_numericUpDown.Size = new System.Drawing.Size(110, 30);
             this.page_numericUpDown.TabIndex = 4;
@@ -61,7 +61,7 @@
             // page_label
             // 
             this.page_label.AutoSize = true;
-            this.page_label.Location = new System.Drawing.Point(685, 20);
+            this.page_label.Location = new System.Drawing.Point(817, 16);
             this.page_label.Name = "page_label";
             this.page_label.Size = new System.Drawing.Size(67, 23);
             this.page_label.TabIndex = 0;
@@ -76,7 +76,7 @@
             this.main_panel.BackColor = System.Drawing.Color.PaleGreen;
             this.main_panel.Location = new System.Drawing.Point(14, 185);
             this.main_panel.Name = "main_panel";
-            this.main_panel.Size = new System.Drawing.Size(1052, 548);
+            this.main_panel.Size = new System.Drawing.Size(1096, 548);
             this.main_panel.TabIndex = 0;
             // 
             // applyActions_button
@@ -102,7 +102,7 @@
             this.settings_panel.Controls.Add(this.maximumPathSquareSize_label);
             this.settings_panel.Location = new System.Drawing.Point(14, 55);
             this.settings_panel.Name = "settings_panel";
-            this.settings_panel.Size = new System.Drawing.Size(1052, 124);
+            this.settings_panel.Size = new System.Drawing.Size(1096, 124);
             this.settings_panel.TabIndex = 0;
             // 
             // showMessageAfterDeleting_checkBox
@@ -206,7 +206,7 @@
             // 
             this.showSettings_checkBox.AutoSize = true;
             this.showSettings_checkBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.showSettings_checkBox.Location = new System.Drawing.Point(933, 14);
+            this.showSettings_checkBox.Location = new System.Drawing.Point(977, 16);
             this.showSettings_checkBox.Name = "showSettings_checkBox";
             this.showSettings_checkBox.Size = new System.Drawing.Size(133, 27);
             this.showSettings_checkBox.TabIndex = 5;
@@ -216,9 +216,9 @@
             // 
             // SelectAllKeep_button
             // 
-            this.SelectAllKeep_button.Location = new System.Drawing.Point(262, 14);
+            this.SelectAllKeep_button.Location = new System.Drawing.Point(242, 14);
             this.SelectAllKeep_button.Name = "SelectAllKeep_button";
-            this.SelectAllKeep_button.Size = new System.Drawing.Size(147, 34);
+            this.SelectAllKeep_button.Size = new System.Drawing.Size(223, 36);
             this.SelectAllKeep_button.TabIndex = 2;
             this.SelectAllKeep_button.Text = "Select all keep";
             this.SelectAllKeep_button.UseVisualStyleBackColor = true;
@@ -226,9 +226,9 @@
             // 
             // SelectAllDelete_button
             // 
-            this.SelectAllDelete_button.Location = new System.Drawing.Point(415, 15);
+            this.SelectAllDelete_button.Location = new System.Drawing.Point(471, 14);
             this.SelectAllDelete_button.Name = "SelectAllDelete_button";
-            this.SelectAllDelete_button.Size = new System.Drawing.Size(147, 34);
+            this.SelectAllDelete_button.Size = new System.Drawing.Size(223, 35);
             this.SelectAllDelete_button.TabIndex = 3;
             this.SelectAllDelete_button.Text = "Select all delete";
             this.SelectAllDelete_button.UseVisualStyleBackColor = true;
@@ -239,7 +239,7 @@
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(1078, 745);
+            this.ClientSize = new System.Drawing.Size(1122, 745);
             this.Controls.Add(this.SelectAllDelete_button);
             this.Controls.Add(this.SelectAllKeep_button);
             this.Controls.Add(this.showSettings_checkBox);
