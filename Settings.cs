@@ -15,7 +15,7 @@ namespace FileCustom
         public static string WebpExtention = "webp";
         public static List<string> ImageExtentions = new List<string>() { "jpg", "jpeg", "png", "bmp", "gif", "tiff" };
         public static string[] Themes = new string[] { "Default", "Dark" };
-        public static string[] UnallowedSymbolsForFoldersPlainText = new string[] { "!", "?", "*", "\"", "'", ">", "<" };
+        public static string[] UnallowedSymbolsForFoldersPlainText = new string[] { "\n!", "?", "*", "\"", "'", ">", "<" };
         
         public static Dictionary<string, string> Settings = new Dictionary<string, string>() {
             { "Main_theme", "" },
