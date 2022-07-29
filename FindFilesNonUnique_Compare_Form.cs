@@ -6,6 +6,7 @@ namespace FileCustom
     {
         private Sugar.FileCustom.ComparaisonLogGroup groupFiles = new();
         private bool isInitializationReady = false;
+        private bool isSettingsComtrolsActionsDisabled = false;
 
         public FindFilesNonUnique_Compare_Form(Sugar.FileCustom.ComparaisonLogGroup groupFilesInput)
         {
@@ -49,15 +50,16 @@ namespace FileCustom
 
         private void applySettingsToControls()
         {
-            maximumPathSquareSize_numericUpDown.Value = ((FileCustomSettings.Settings["FindFilesNonUnique_Compare_maximumPathSquareSize"].IsNullOrEmpty())
-                ? maximumPathSquareSize_numericUpDown.Value
-                : Convert.ToDecimal(FileCustomSettings.Settings["FindFilesNonUnique_Compare_maximumPathSquareSize"]));
+            isSettingsComtrolsActionsDisabled = true;
+            if (!FileCustomSettings.Settings["FindFilesNonUnique_Compare_maximumPathSquareSize"].IsNullOrEmpty())
+                maximumPathSquareSize_numericUpDown.Value = Convert.ToDecimal(FileCustomSettings.Settings["FindFilesNonUnique_Compare_maximumPathSquareSize"]);
 
-            maximumPictureSquareSize_numericUpDown.Value = ((FileCustomSettings.Settings["FindFilesNonUnique_Compare_pictureSquareSize"].IsNullOrEmpty())
-                ? maximumPictureSquareSize_numericUpDown.Value
-                : Convert.ToDecimal(FileCustomSettings.Settings["FindFilesNonUnique_Compare_pictureSquareSize"]));
+            if (!FileCustomSettings.Settings["FindFilesNonUnique_Compare_pictureSquareSize"].IsNullOrEmpty())
+                maximumPictureSquareSize_numericUpDown.Value = Convert.ToDecimal(FileCustomSettings.Settings["FindFilesNonUnique_Compare_pictureSquareSize"]);
 
-            showMessageAfterDeleting_checkBox.Checked = FileCustomSettings.Settings["FindFilesNonUnique_Compare_showMessageAfterDeleting"].ToBool();
+            if (!FileCustomSettings.Settings["FindFilesNonUnique_Compare_showMessageAfterDeleting"].IsNullOrEmpty())
+                showMessageAfterDeleting_checkBox.Checked = FileCustomSettings.Settings["FindFilesNonUnique_Compare_showMessageAfterDeleting"].ToBool();
+            isSettingsComtrolsActionsDisabled = false;
         }
 
         private void getSettingsFromControls()
@@ -272,17 +274,20 @@ namespace FileCustom
 
         private void maximumPathSquareSize_numericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            applyNonLoadableSetting();
+            if (!isSettingsComtrolsActionsDisabled)
+                applyNonLoadableSetting();
         }
 
         private void maximumPictureSquareSize_numericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            applyNonLoadableSetting();
+            if (!isSettingsComtrolsActionsDisabled)
+                applyNonLoadableSetting();
         }
 
         private void showMessageAfterDeleting_checkBox_CheckedChanged(object sender, EventArgs e)
         {
-            getSettingsFromControls();
+            if (!isSettingsComtrolsActionsDisabled)
+                getSettingsFromControls();
         }
 
         private void saveSettings_button_Click(object sender, EventArgs e)
