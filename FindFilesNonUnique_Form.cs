@@ -4,7 +4,9 @@ namespace FileCustom
 {
     public partial class FindFilesNonUnique_Form : Form
     {
-        Sugar.FileCustom.ComparaisonLogGroup resultGroup = new Sugar.FileCustom.ComparaisonLogGroup();
+        Sugar.FileCustom.ComparaisonLogOutput logOutput = new();
+        string keyCompared = "keyCompared";
+        string keyMore2GB = "keyMore2GB";
 
         public FindFilesNonUnique_Form()
         {
@@ -34,7 +36,7 @@ namespace FileCustom
         {
             result_richTextBox.Text = "";
             getSettingsFromControls();
-            resultGroup = new Sugar.FileCustom.ComparaisonLogGroup();
+            logOutput = new Sugar.FileCustom.ComparaisonLogOutput();
 
             if (!FileCustomSettings.Settings.IsNullOrEmpty())
             {
@@ -45,9 +47,8 @@ namespace FileCustom
 
                 if (files.Count > 0)
                 {
-                    resultGroup = Sugar.FileCustom.FindFilesNonUnique(files);
-                    if (!resultGroup.IsEmpty())
-                        result_richTextBox.Text = resultGroup.Display();
+                    logOutput = Sugar.FileCustom.FindFilesNonUnique(files);
+                    result_richTextBox.Text = logOutput.DisplayAll();
                 }
                 else
                     MessageBox.Show("Error! Files count is 0");
@@ -58,7 +59,7 @@ namespace FileCustom
 
         private void runImageCompare_button_Click(object sender, EventArgs e)
         {
-            new FindFilesNonUnique_Compare_Form(resultGroup).Show();
+            new FindFilesNonUnique_Compare_Form(logOutput.Groups[keyCompared]).Show();
         }
     }
 }
