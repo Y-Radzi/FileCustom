@@ -40,6 +40,8 @@
             this.maximumPathSquareSize_numericUpDown = new System.Windows.Forms.NumericUpDown();
             this.maximumPathSquareSize_label = new System.Windows.Forms.Label();
             this.showSettings_checkBox = new System.Windows.Forms.CheckBox();
+            this.SelectAllKeep_button = new System.Windows.Forms.Button();
+            this.SelectAllDelete_button = new System.Windows.Forms.Button();
             ((System.ComponentModel.ISupportInitialize)(this.page_numericUpDown)).BeginInit();
             this.settings_panel.SuspendLayout();
             ((System.ComponentModel.ISupportInitialize)(this.maximumPictureSquareSize_numericUpDown)).BeginInit();
@@ -49,17 +51,17 @@
             // page_numericUpDown
             // 
             this.page_numericUpDown.BorderStyle = System.Windows.Forms.BorderStyle.FixedSingle;
-            this.page_numericUpDown.Location = new System.Drawing.Point(314, 14);
+            this.page_numericUpDown.Location = new System.Drawing.Point(568, 18);
             this.page_numericUpDown.Name = "page_numericUpDown";
             this.page_numericUpDown.Size = new System.Drawing.Size(110, 30);
-            this.page_numericUpDown.TabIndex = 2;
+            this.page_numericUpDown.TabIndex = 4;
             this.page_numericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.page_numericUpDown.ValueChanged += new System.EventHandler(this.page_numericUpDown_ValueChanged);
             // 
             // page_label
             // 
             this.page_label.AutoSize = true;
-            this.page_label.Location = new System.Drawing.Point(431, 16);
+            this.page_label.Location = new System.Drawing.Point(685, 20);
             this.page_label.Name = "page_label";
             this.page_label.Size = new System.Drawing.Size(67, 23);
             this.page_label.TabIndex = 0;
@@ -74,7 +76,7 @@
             this.main_panel.BackColor = System.Drawing.Color.PaleGreen;
             this.main_panel.Location = new System.Drawing.Point(14, 185);
             this.main_panel.Name = "main_panel";
-            this.main_panel.Size = new System.Drawing.Size(897, 548);
+            this.main_panel.Size = new System.Drawing.Size(1052, 548);
             this.main_panel.TabIndex = 0;
             // 
             // applyActions_button
@@ -100,7 +102,7 @@
             this.settings_panel.Controls.Add(this.maximumPathSquareSize_label);
             this.settings_panel.Location = new System.Drawing.Point(14, 55);
             this.settings_panel.Name = "settings_panel";
-            this.settings_panel.Size = new System.Drawing.Size(897, 124);
+            this.settings_panel.Size = new System.Drawing.Size(1052, 124);
             this.settings_panel.TabIndex = 0;
             // 
             // showMessageAfterDeleting_checkBox
@@ -109,7 +111,7 @@
             this.showMessageAfterDeleting_checkBox.Location = new System.Drawing.Point(228, 84);
             this.showMessageAfterDeleting_checkBox.Name = "showMessageAfterDeleting_checkBox";
             this.showMessageAfterDeleting_checkBox.Size = new System.Drawing.Size(259, 27);
-            this.showMessageAfterDeleting_checkBox.TabIndex = 7;
+            this.showMessageAfterDeleting_checkBox.TabIndex = 9;
             this.showMessageAfterDeleting_checkBox.Text = "Show message after deleting?";
             this.showMessageAfterDeleting_checkBox.UseVisualStyleBackColor = true;
             this.showMessageAfterDeleting_checkBox.CheckedChanged += new System.EventHandler(this.showMessageAfterDeleting_checkBox_CheckedChanged);
@@ -119,7 +121,7 @@
             this.saveSettings_button.Location = new System.Drawing.Point(3, 3);
             this.saveSettings_button.Name = "saveSettings_button";
             this.saveSettings_button.Size = new System.Drawing.Size(218, 74);
-            this.saveSettings_button.TabIndex = 4;
+            this.saveSettings_button.TabIndex = 6;
             this.saveSettings_button.Text = "Save settings";
             this.saveSettings_button.UseVisualStyleBackColor = true;
             this.saveSettings_button.Click += new System.EventHandler(this.saveSettings_button_Click);
@@ -144,7 +146,7 @@
             0});
             this.maximumPictureSquareSize_numericUpDown.Name = "maximumPictureSquareSize_numericUpDown";
             this.maximumPictureSquareSize_numericUpDown.Size = new System.Drawing.Size(253, 30);
-            this.maximumPictureSquareSize_numericUpDown.TabIndex = 6;
+            this.maximumPictureSquareSize_numericUpDown.TabIndex = 8;
             this.maximumPictureSquareSize_numericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.maximumPictureSquareSize_numericUpDown.Value = new decimal(new int[] {
             300,
@@ -182,7 +184,7 @@
             0});
             this.maximumPathSquareSize_numericUpDown.Name = "maximumPathSquareSize_numericUpDown";
             this.maximumPathSquareSize_numericUpDown.Size = new System.Drawing.Size(253, 30);
-            this.maximumPathSquareSize_numericUpDown.TabIndex = 5;
+            this.maximumPathSquareSize_numericUpDown.TabIndex = 7;
             this.maximumPathSquareSize_numericUpDown.TextAlign = System.Windows.Forms.HorizontalAlignment.Center;
             this.maximumPathSquareSize_numericUpDown.Value = new decimal(new int[] {
             350,
@@ -204,20 +206,42 @@
             // 
             this.showSettings_checkBox.AutoSize = true;
             this.showSettings_checkBox.FlatStyle = System.Windows.Forms.FlatStyle.Flat;
-            this.showSettings_checkBox.Location = new System.Drawing.Point(778, 14);
+            this.showSettings_checkBox.Location = new System.Drawing.Point(933, 14);
             this.showSettings_checkBox.Name = "showSettings_checkBox";
             this.showSettings_checkBox.Size = new System.Drawing.Size(133, 27);
-            this.showSettings_checkBox.TabIndex = 3;
+            this.showSettings_checkBox.TabIndex = 5;
             this.showSettings_checkBox.Text = "Show settings";
             this.showSettings_checkBox.UseVisualStyleBackColor = true;
             this.showSettings_checkBox.CheckedChanged += new System.EventHandler(this.showSettings_checkBox_CheckedChanged);
+            // 
+            // SelectAllKeep_button
+            // 
+            this.SelectAllKeep_button.Location = new System.Drawing.Point(262, 14);
+            this.SelectAllKeep_button.Name = "SelectAllKeep_button";
+            this.SelectAllKeep_button.Size = new System.Drawing.Size(147, 34);
+            this.SelectAllKeep_button.TabIndex = 2;
+            this.SelectAllKeep_button.Text = "Select all keep";
+            this.SelectAllKeep_button.UseVisualStyleBackColor = true;
+            this.SelectAllKeep_button.Click += new System.EventHandler(this.SelectAllKeep_button_Click);
+            // 
+            // SelectAllDelete_button
+            // 
+            this.SelectAllDelete_button.Location = new System.Drawing.Point(415, 15);
+            this.SelectAllDelete_button.Name = "SelectAllDelete_button";
+            this.SelectAllDelete_button.Size = new System.Drawing.Size(147, 34);
+            this.SelectAllDelete_button.TabIndex = 3;
+            this.SelectAllDelete_button.Text = "Select all delete";
+            this.SelectAllDelete_button.UseVisualStyleBackColor = true;
+            this.SelectAllDelete_button.Click += new System.EventHandler(this.SelectAllDelete_button_Click);
             // 
             // FindFilesNonUnique_Compare_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.AutoScroll = true;
-            this.ClientSize = new System.Drawing.Size(923, 745);
+            this.ClientSize = new System.Drawing.Size(1078, 745);
+            this.Controls.Add(this.SelectAllDelete_button);
+            this.Controls.Add(this.SelectAllKeep_button);
             this.Controls.Add(this.showSettings_checkBox);
             this.Controls.Add(this.settings_panel);
             this.Controls.Add(this.applyActions_button);
@@ -252,5 +276,7 @@
         private Label maximumPathSquareSize_label;
         private Button saveSettings_button;
         private CheckBox showMessageAfterDeleting_checkBox;
+        private Button SelectAllKeep_button;
+        private Button SelectAllDelete_button;
     }
 }

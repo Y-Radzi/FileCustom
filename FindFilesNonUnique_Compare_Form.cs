@@ -195,6 +195,18 @@ namespace FileCustom
             main_panel.AlignChildControlsByMaxSizeGrid(FileCustomSettings.DistanceBetweenFormControls, true);
         }
 
+        private void selectAllElementsTo(bool isDeleted)
+        {
+            bool delete_RadioButton_value = isDeleted;
+            bool keep_RadioButton_value = !isDeleted;
+
+            foreach (Panel panel in main_panel.Controls)
+            {
+                ((RadioButton)((GroupBox)panel.Controls["groupBox"]).Controls["delete_RadioButton"]).Checked = delete_RadioButton_value;
+                ((RadioButton)((GroupBox)panel.Controls["groupBox"]).Controls["keep_RadioButton"]).Checked = keep_RadioButton_value;
+            }
+        }
+
         private void page_numericUpDown_ValueChanged(object sender, EventArgs e)
         {
             updatePage();
@@ -279,5 +291,14 @@ namespace FileCustom
             FileCustomSettings.Write();
         }
 
+        private void SelectAllKeep_button_Click(object sender, EventArgs e)
+        {
+            selectAllElementsTo(false);
+        }
+
+        private void SelectAllDelete_button_Click(object sender, EventArgs e)
+        {
+            selectAllElementsTo(true);
+        }
     }
 }
