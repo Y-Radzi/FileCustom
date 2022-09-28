@@ -33,7 +33,7 @@
             this.go_button = new System.Windows.Forms.Button();
             this.result_richTextBox = new System.Windows.Forms.RichTextBox();
             this.result_label = new System.Windows.Forms.Label();
-            this.runImageCompare_button = new System.Windows.Forms.Button();
+            this.runCompare_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // folders_label
@@ -62,7 +62,7 @@
             this.go_button.Name = "go_button";
             this.go_button.Size = new System.Drawing.Size(218, 33);
             this.go_button.TabIndex = 2;
-            this.go_button.Text = "Go";
+            this.go_button.Text = "Go find";
             this.go_button.UseVisualStyleBackColor = true;
             this.go_button.Click += new System.EventHandler(this.go_button_Click);
             // 
@@ -87,22 +87,22 @@
             this.result_label.TabIndex = 4;
             this.result_label.Text = "Result";
             // 
-            // runImageCompare_button
+            // runCompare_button
             // 
-            this.runImageCompare_button.Location = new System.Drawing.Point(238, 143);
-            this.runImageCompare_button.Name = "runImageCompare_button";
-            this.runImageCompare_button.Size = new System.Drawing.Size(218, 33);
-            this.runImageCompare_button.TabIndex = 5;
-            this.runImageCompare_button.Text = "RunImageCompare";
-            this.runImageCompare_button.UseVisualStyleBackColor = true;
-            this.runImageCompare_button.Click += new System.EventHandler(this.runImageCompare_button_Click);
+            this.runCompare_button.Location = new System.Drawing.Point(238, 143);
+            this.runCompare_button.Name = "runCompare_button";
+            this.runCompare_button.Size = new System.Drawing.Size(218, 33);
+            this.runCompare_button.TabIndex = 5;
+            this.runCompare_button.Text = "Run compare";
+            this.runCompare_button.UseVisualStyleBackColor = true;
+            this.runCompare_button.Click += new System.EventHandler(this.runCompare_button_Click);
             // 
             // FindFilesNonUnique_Form
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
             this.AutoScaleMode = System.Windows.Forms.AutoScaleMode.Font;
             this.ClientSize = new System.Drawing.Size(1032, 715);
-            this.Controls.Add(this.runImageCompare_button);
+            this.Controls.Add(this.runCompare_button);
             this.Controls.Add(this.result_label);
             this.Controls.Add(this.result_richTextBox);
             this.Controls.Add(this.go_button);
@@ -123,6 +123,6 @@
         private Button go_button;
         private RichTextBox result_richTextBox;
         private Label result_label;
-        private Button runImageCompare_button;
+        private Button runCompare_button;
     }
 }

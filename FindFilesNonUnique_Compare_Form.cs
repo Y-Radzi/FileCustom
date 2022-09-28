@@ -5,16 +5,13 @@ namespace FileCustom
     public partial class FindFilesNonUnique_Compare_Form : Form
     {
         private Sugar.FileCustom.ComparaisonLogGroup groupFiles = new();
-        private bool isInitializationReady = false;
         private bool isSettingsComtrolsActionsDisabled = false;
 
         public FindFilesNonUnique_Compare_Form(Sugar.FileCustom.ComparaisonLogGroup groupFilesInput)
         {
             InitializeComponent();
-            isInitializationReady = false;
 
             FileCustomSettings.SetTheme(this);
-            updateControlsLocation();
             showSettings_checkBox_CheckedChanged(null, null);
 
             if (!groupFilesInput.IsEmpty())
@@ -24,28 +21,7 @@ namespace FileCustom
 
             applySettingsToControls();
             ifgroupFilesChanged();
-            isInitializationReady = true;
             updatePage();
-        }
-
-        private void updateControlsLocation()
-        {
-            page_label.Location = new Point(
-                page_numericUpDown.Location.X + page_numericUpDown.Width + FileCustomSettings.DistanceBetweenFormControls,
-                page_label.Location.Y);
-
-            int pathSquareSizeX = saveSettings_button.Location.X + saveSettings_button.Width + FileCustomSettings.DistanceBetweenFormControls;
-            maximumPathSquareSize_numericUpDown.Location = new Point(pathSquareSizeX, maximumPathSquareSize_numericUpDown.Location.Y);
-            maximumPathSquareSize_label.Location = new Point(pathSquareSizeX, maximumPathSquareSize_label.Location.Y);
-
-            int pictureSquareSizeX = FileCustomSettings.DistanceBetweenFormControls + (
-                (maximumPathSquareSize_numericUpDown.Size.Width > maximumPathSquareSize_label.Size.Width)
-                    ? maximumPathSquareSize_numericUpDown.Location.X + maximumPathSquareSize_numericUpDown.Size.Width
-                    : maximumPathSquareSize_label.Location.X + maximumPathSquareSize_label.Size.Width
-                );
-            maximumPictureSquareSize_numericUpDown.Location = new Point(pictureSquareSizeX, maximumPictureSquareSize_numericUpDown.Location.Y);
-            maximumPictureSquareSize_label.Location = new Point(pictureSquareSizeX, maximumPictureSquareSize_label.Location.Y);
-
         }
 
         private void applySettingsToControls()
@@ -93,92 +69,95 @@ namespace FileCustom
 
         private void updatePage()
         {
-            if (isInitializationReady)
+            main_panel.Controls.Clear();
+            getSettingsFromControls();
+            if (!groupFiles.IsEmpty())
             {
-                main_panel.Controls.Clear();
-                getSettingsFromControls();
-                if (!groupFiles.IsEmpty())
+                var files = groupFiles.Elements[page_numericUpDown.Value.ToInt32() - 1].GetMainAndCompared();
+                int maximumPathSquareSize = FileCustomSettings.Settings["FindFilesNonUnique_Compare_maximumPathSquareSize"].ToInt32();
+                int pictureSquareSize = FileCustomSettings.Settings["FindFilesNonUnique_Compare_pictureSquareSize"].ToInt32();
+
+                var bitmap = FileCustomSugar.GetFileBitmap(
+                    files[0], //first file, files are same
+                    FileExtra.IsAnyFileHasExtention(files, FileCustomSettings.ImageExtentions),
+                    FileExtra.IsAnyFileHasExtention(files, new List<string>() { FileCustomSettings.WebpExtention })
+                    );
+
+                for (int i = 0; i < files.Count; i++)
                 {
-                    var files = groupFiles.Elements[page_numericUpDown.Value.ToInt32() - 1].GetMainAndCompared();
-                    int maximumPathSquareSize = FileCustomSettings.Settings["FindFilesNonUnique_Compare_maximumPathSquareSize"].ToInt32();
-                    int pictureSquareSize = FileCustomSettings.Settings["FindFilesNonUnique_Compare_pictureSquareSize"].ToInt32();
-
-                    var bitmap = FileCustomSugar.GetFileBitmap(
-                        files[0], //first file, files are same
-                        FileExtra.IsAnyFileHasExtention(files, FileCustomSettings.ImageExtentions),
-                        FileExtra.IsAnyFileHasExtention(files, new List<string>() { FileCustomSettings.WebpExtention })
-                        );
-
-                    for (int i = 0; i < files.Count; i++)
+                    ///////////////////////////////////////////Element panel
+                    var panel = new Panel()
                     {
-                        ///////////////////////////////////////////Element panel
-                        var panel = new Panel()
-                        {
-                            Name = files[i],
-                            AutoScroll = true,
-                            AutoSize = true,
-                            AutoSizeMode = AutoSizeMode.GrowAndShrink,
-                        };
+                        Name = files[i],
+                        AutoScroll = true,
+                        AutoSize = true,
+                        AutoSizeMode = AutoSizeMode.GrowAndShrink,
+                    };
 
-                        ///////////////////////////////////////////Label
-                        panel.Controls.Add(new Label()
-                        {
-                            MaximumSize = new Size(maximumPathSquareSize, maximumPathSquareSize),
-                            AutoSize = true,
-                            Name = "path_label",
-                            Text = files[i],
-                            Font = this.Font,
-                            ForeColor = this.ForeColor
-                        });
+                    ///////////////////////////////////////////Label
+                    string linkLabelLink = (true) ? FileExtra.GetFileFolder(files[i]) : files[i];
 
-                        ///////////////////////////////////////////Radio buttons
-                        var groupBox = new GroupBox()
-                        {
-                            Name = "groupBox",
-                            AutoSize = true,
-                            Text = "Action",
-                            Font = this.Font,
-                            ForeColor = this.ForeColor
-                        };
-                        groupBox.Controls.Add(new RadioButton()
-                        {
-                            Location = new Point(31, 20),
-                            Name = "keep_RadioButton",
-                            AutoSize = true,
-                            Text = "Keep",
-                            Checked = true,
-                            Font = this.Font,
-                            ForeColor = this.ForeColor
-                        });
-                        groupBox.Controls.Add(new RadioButton()
-                        {
-                            Location = new Point(31, 53),
-                            Name = "delete_RadioButton",
-                            AutoSize = true,
-                            Text = "Delete",
-                            Checked = false,
-                            Font = this.Font,
-                            ForeColor = this.ForeColor
-                        });
-                        panel.Controls.Add(groupBox);
+                    var linkLabel = new LinkLabel()
+                    {
+                        MaximumSize = new Size(maximumPathSquareSize, maximumPathSquareSize),
+                        AutoSize = true,
+                        Name = "path_label",
+                        Text = files[i],
+                        Font = this.Font,
+                        ForeColor = this.ForeColor,
+                    };
+                    linkLabel.Links.Add(0, linkLabelLink.Length, linkLabelLink);
+                    linkLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(LinkLabelExtra.LinkLabelClickedSimple);
 
-                        ///////////////////////////////////////////Image
-                        if (bitmap != null)
+                    panel.Controls.Add(linkLabel);
+                        
+                    ///////////////////////////////////////////Radio buttons
+                    var groupBox = new GroupBox()
+                    {
+                        Name = "groupBox",
+                        AutoSize = true,
+                        Text = "Action",
+                        Font = this.Font,
+                        ForeColor = this.ForeColor
+                    };
+                    groupBox.Controls.Add(new RadioButton()
+                    {
+                        Location = new Point(31, 20),
+                        Name = "keep_RadioButton",
+                        AutoSize = true,
+                        Text = "Keep",
+                        Checked = true,
+                        Font = this.Font,
+                        ForeColor = this.ForeColor
+                    });
+                    groupBox.Controls.Add(new RadioButton()
+                    {
+                        Location = new Point(31, 53),
+                        Name = "delete_RadioButton",
+                        AutoSize = true,
+                        Text = "Delete",
+                        Checked = false,
+                        Font = this.Font,
+                        ForeColor = this.ForeColor
+                    });
+                    panel.Controls.Add(groupBox);
+
+                    ///////////////////////////////////////////Image
+                    if (bitmap != null)
+                    {
+                        panel.Controls.Add(new PictureBox()
                         {
-                            panel.Controls.Add(new PictureBox()
-                            {
-                                Size = new Size(pictureSquareSize, pictureSquareSize),
-                                SizeMode = PictureBoxSizeMode.Zoom,
-                                Name = "pictureBox",
-                                Image = bitmap
-                            });
-                        }
-                        panel.AlignChildControlsVertical(FileCustomSettings.DistanceBetweenFormControls);
-                        main_panel.Controls.Add(panel);
+                            Size = new Size(pictureSquareSize, pictureSquareSize),
+                            SizeMode = PictureBoxSizeMode.Zoom,
+                            Name = "pictureBox",
+                            Image = bitmap
+                        });
                     }
+                    panel.AlignChildControlsVertical(FileCustomSettings.DistanceBetweenFormControls);
+                    main_panel.Controls.Add(panel);
                 }
-                main_panel.AlignChildControlsByMaxSizeGrid(FileCustomSettings.DistanceBetweenFormControls, true);
             }
+            main_panel.AlignChildControlsByMaxSizeGrid(FileCustomSettings.DistanceBetweenFormControls, true);
         }
 
         private void applyNonLoadableSetting()

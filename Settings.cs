@@ -5,16 +5,54 @@ namespace FileCustom
 {
     public static class FileCustomSettings
     {
+        /// <summary>
+        /// "Settings_FileCustom.txt"
+        /// </summary>
         public static string SettingsFileName = "Settings_FileCustom.txt";
+
+        /// <summary>
+        /// Encoding.Default
+        /// </summary>
         public static Encoding SettingsEncoding = Encoding.Default;
+
+        /// <summary>
+        /// ": "
+        /// </summary>
         public static string SettingsKeySplitter = ": ";
+
+        /// <summary>
+        /// "\n!"
+        /// </summary>
         public static string SettingsVariableSplitter = "\n!";
 
+        /// <summary>
+        /// "\n"
+        /// </summary>
         public static string InputFoldersSplitter = "\n";
+
+        /// <summary>
+        /// 6
+        /// </summary>
         public static int DistanceBetweenFormControls = 6;
+
+        /// <summary>
+        /// "webp"
+        /// </summary>
         public static string WebpExtention = "webp";
+
+        /// <summary>
+        /// "jpg", "jpeg", "png", "bmp", "gif", "tiff"
+        /// </summary>
         public static List<string> ImageExtentions = new List<string>() { "jpg", "jpeg", "png", "bmp", "gif", "tiff" };
+
+        /// <summary>
+        /// "Default", "Dark"
+        /// </summary>
         public static string[] Themes = new string[] { "Default", "Dark" };
+
+        /// <summary>
+        /// "\n!", "?", "*", "\"", "'", ">", "<"
+        /// </summary>
         public static string[] UnallowedSymbolsForFoldersPlainText = new string[] { "\n!", "?", "*", "\"", "'", ">", "<" };
         
         public static Dictionary<string, string> Settings = new Dictionary<string, string>() {

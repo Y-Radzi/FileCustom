@@ -6,7 +6,6 @@ namespace FileCustom
     {
         Sugar.FileCustom.ComparaisonLogOutput logOutput = new();
         string keyCompared = "keyCompared";
-        string keyMore2GB = "keyMore2GB";
 
         public FindFilesNonUnique_Form()
         {
@@ -57,9 +56,10 @@ namespace FileCustom
                 MessageBox.Show("Error! Settings is empty!");
         }
 
-        private void runImageCompare_button_Click(object sender, EventArgs e)
+        private void runCompare_button_Click(object sender, EventArgs e)
         {
-            new FindFilesNonUnique_Compare_Form(logOutput.Groups[keyCompared]).Show();
+            if (logOutput.Groups.ContainsKey(keyCompared))
+                new FindFilesNonUnique_Compare_Form(logOutput.Groups[keyCompared]).Show();
         }
     }
 }

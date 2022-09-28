@@ -56,7 +56,7 @@ namespace FileCustom
 
                 if (filesToCompareFull.Count > 0 && filesToDeleteFull.Count > 0)
                 {
-                    var log = Sugar.FileCustom.DeleteFilesIfEqualsDataShortNames(filesToDeleteFull, filesToCompareFull, false);
+                    var log = Sugar.FileCustom.DeleteFilesIfEqualsData(filesToDeleteFull, filesToCompareFull, false);
                     result_richTextBox.Text = log.DisplayAll();
                 }
                 else
