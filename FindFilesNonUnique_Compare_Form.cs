@@ -20,7 +20,7 @@ namespace FileCustom
                         groupFiles.Elements.Add(element);
 
             applySettingsToControls();
-            ifgroupFilesChanged();
+            ifGroupFilesChanged();
             updatePage();
         }
 
@@ -45,7 +45,7 @@ namespace FileCustom
             FileCustomSettings.Settings["FindFilesNonUnique_Compare_showMessageAfterDeleting"] = showMessageAfterDeleting_checkBox.Checked.ToString();
         }
 
-        private void ifgroupFilesChanged()
+        private void ifGroupFilesChanged()
         {
             if (!groupFiles.IsEmpty())
             {
@@ -190,7 +190,8 @@ namespace FileCustom
 
         private void page_numericUpDown_ValueChanged(object sender, EventArgs e)
         {
-            updatePage();
+            ifGroupFilesChanged();
+            //updatePage();
         }
 
         private void applyActions_button_Click(object sender, EventArgs e)
@@ -214,10 +215,11 @@ namespace FileCustom
             {
                 if (isShowMessageAfterDeleting)
                     MessageBox.Show($"Files deleted to recycle bin: {Environment.NewLine} {deletedFiles.Display()}");
-                ifgroupFilesChanged();
             }
             else if (isShowMessageAfterDeleting)
                 MessageBox.Show("Nothing files deleted");
+
+            ifGroupFilesChanged();
         }
 
         private void FindFilesNonUnique_ImageCompare_SizeChanged(object sender, EventArgs e)
