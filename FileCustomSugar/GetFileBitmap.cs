@@ -47,8 +47,7 @@ namespace FileCustom
             {
                 try
                 {
-                    ShellFile shellFile = ShellFile.FromFilePath(fileFullName);
-                    resultBitmap = shellFile.Thumbnail.ExtraLargeBitmap;
+                    resultBitmap = ShellFile.FromFilePath(fileFullName).Thumbnail.ExtraLargeBitmap;
                 }
                 catch
                 {

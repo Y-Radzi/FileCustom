@@ -62,9 +62,9 @@
             this.foldersToDelete_label.AutoSize = true;
             this.foldersToDelete_label.Location = new System.Drawing.Point(14, 196);
             this.foldersToDelete_label.Name = "foldersToDelete_label";
-            this.foldersToDelete_label.Size = new System.Drawing.Size(137, 23);
+            this.foldersToDelete_label.Size = new System.Drawing.Size(380, 23);
             this.foldersToDelete_label.TabIndex = 0;
-            this.foldersToDelete_label.Text = "Folders to delete";
+            this.foldersToDelete_label.Text = "Folders to delete (auto-excludes comparing files)";
             // 
             // foldersToDelete_richTextBox
             // 

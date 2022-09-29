@@ -9,6 +9,9 @@ namespace FileCustom
             InitializeComponent();
             FileCustomSettings.SetTheme(this);
             applySettingsToControls();
+            foldersToCompare_richTextBox.AddDefaultShortContextMenu();
+            foldersToDelete_richTextBox.AddDefaultShortContextMenu();
+            result_richTextBox.AddDefaultShortContextMenu();
         }
 
         private void applySettingsToControls()
@@ -21,22 +24,6 @@ namespace FileCustom
         {
             FileCustomSettings.Settings["DeleteFilesIfEquals_foldersToCompare"] = foldersToCompare_richTextBox.Text;
             FileCustomSettings.Settings["DeleteFilesIfEquals_foldersToDelete"] = foldersToDelete_richTextBox.Text;
-        }
-
-        private void foldersToCompare_richTextBox_TextChanged(object sender, EventArgs e)
-        {
-            int i = foldersToCompare_richTextBox.SelectionStart;
-            foldersToCompare_richTextBox.Text = foldersToCompare_richTextBox.Text
-                .RemoveWhileEquals(StringExtra.Side.All, FileCustomSettings.UnallowedSymbolsForFoldersPlainText);
-            foldersToCompare_richTextBox.SelectionStart = i;
-        }
-
-        private void foldersToDelete_richTextBox_TextChanged(object sender, EventArgs e)
-        {
-            int i = foldersToDelete_richTextBox.SelectionStart;
-            foldersToDelete_richTextBox.Text = foldersToDelete_richTextBox.Text
-                .RemoveWhileEquals(StringExtra.Side.All, FileCustomSettings.UnallowedSymbolsForFoldersPlainText);
-            foldersToDelete_richTextBox.SelectionStart = i;
         }
 
         private void go_button_Click(object sender, EventArgs e)
@@ -64,6 +51,16 @@ namespace FileCustom
             }
             else
                 MessageBox.Show("Error! Settings is empty!");
+        }
+
+        private void foldersToCompare_richTextBox_TextChanged(object sender, EventArgs e)
+        {
+            FileCustomSugar.Folders_richTextBox_TextChanged(sender, e);
+        }
+
+        private void foldersToDelete_richTextBox_TextChanged(object sender, EventArgs e)
+        {
+            FileCustomSugar.Folders_richTextBox_TextChanged(sender, e);
         }
     }
 }

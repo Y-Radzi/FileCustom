@@ -12,6 +12,8 @@ namespace FileCustom
             InitializeComponent();
             FileCustomSettings.SetTheme(this);
             applySettingsToControls();
+            folders_richTextBox.AddDefaultShortContextMenu();
+            result_richTextBox.AddDefaultShortContextMenu();
         }
 
         private void applySettingsToControls()
@@ -22,13 +24,6 @@ namespace FileCustom
         private void getSettingsFromControls()
         {
             FileCustomSettings.Settings["FindFilesNonUnique_Folders"] = folders_richTextBox.Text;
-        }
-
-        private void folders_richTextBox_TextChanged(object sender, EventArgs e)
-        {
-            int i = folders_richTextBox.SelectionStart;
-            folders_richTextBox.Text = folders_richTextBox.Text.RemoveWhileEquals(StringExtra.Side.All, FileCustomSettings.UnallowedSymbolsForFoldersPlainText);
-            folders_richTextBox.SelectionStart = i;
         }
 
         private void go_button_Click(object sender, EventArgs e)
@@ -60,6 +55,11 @@ namespace FileCustom
         {
             if (logOutput.Groups.ContainsKey(keyCompared))
                 new FindFilesNonUnique_Compare_Form(logOutput.Groups[keyCompared]).Show();
+        }
+
+        private void folders_richTextBox_TextChanged(object sender, EventArgs e)
+        {
+            FileCustomSugar.Folders_richTextBox_TextChanged(sender, e);
         }
     }
 }

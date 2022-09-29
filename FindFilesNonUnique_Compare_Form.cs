@@ -107,8 +107,8 @@ namespace FileCustom
                         ForeColor = this.ForeColor,
                     };
                     linkLabel.Links.Add(0, linkLabelLink.Length, linkLabelLink);
+                    linkLabel.AddFileNameCopyContextMenu();
                     linkLabel.LinkClicked += new LinkLabelLinkClickedEventHandler(LinkLabelExtra.LinkLabelClickedSimple);
-
                     panel.Controls.Add(linkLabel);
                         
                     ///////////////////////////////////////////Radio buttons
