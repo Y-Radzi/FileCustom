@@ -95,7 +95,7 @@ namespace FileCustom
                     };
 
                     ///////////////////////////////////////////Label
-                    string linkLabelLink = (true) ? FileExtra.GetFileFolder(files[i]) : files[i];
+                    string linkLabelLink = (true) ? FileExtra.GetFileFolder(files[i]) : files[i]; //(true) - replace in future
 
                     var linkLabel = new LinkLabel()
                     {
