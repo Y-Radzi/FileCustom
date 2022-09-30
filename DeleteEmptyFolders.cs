@@ -13,23 +13,13 @@ namespace FileCustom
             result_richTextBox.AddDefaultShortContextMenu();
 
             folders_richTextBox.AllowDrop = true;
-            folders_richTextBox.DragDrop += new DragEventHandler(folders_richTextBox_DragDrop);
-            folders_richTextBox.DragEnter += new DragEventHandler(folders_richTextBox_DragEnter);
+            folders_richTextBox.DragDrop += new DragEventHandler(RichTextBoxExtra.DragDrop_Folder);
+            folders_richTextBox.DragEnter += new DragEventHandler(RichTextBoxExtra.DragEnter_File);
         }
 
         private void folders_richTextBox_TextChanged(object sender, EventArgs e)
         {
             FileCustomSugar.Folders_richTextBox_TextChanged(sender, e);
-        }
-
-        private void folders_richTextBox_DragDrop(object sender, DragEventArgs e)
-        {
-            folders_richTextBox.DragDrop_Folder(e);
-        }
-
-        private void folders_richTextBox_DragEnter(object sender, DragEventArgs e)
-        {
-            folders_richTextBox.DragEnter_File(e);
         }
 
         private void applySettingsToControls()

@@ -14,6 +14,10 @@ namespace FileCustom
             applySettingsToControls();
             folders_richTextBox.AddDefaultShortContextMenu();
             result_richTextBox.AddDefaultShortContextMenu();
+
+            folders_richTextBox.AllowDrop = true;
+            folders_richTextBox.DragDrop += new DragEventHandler(RichTextBoxExtra.DragDrop_Folder);
+            folders_richTextBox.DragEnter += new DragEventHandler(RichTextBoxExtra.DragEnter_File);
         }
 
         private void applySettingsToControls()

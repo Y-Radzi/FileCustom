@@ -12,6 +12,23 @@ namespace FileCustom
             foldersToCompare_richTextBox.AddDefaultShortContextMenu();
             foldersToDelete_richTextBox.AddDefaultShortContextMenu();
             result_richTextBox.AddDefaultShortContextMenu();
+
+            foldersToCompare_richTextBox.AllowDrop = true;
+            foldersToCompare_richTextBox.DragDrop += new DragEventHandler(RichTextBoxExtra.DragDrop_Folder);
+            foldersToCompare_richTextBox.DragEnter += new DragEventHandler(RichTextBoxExtra.DragEnter_File);
+            foldersToDelete_richTextBox.AllowDrop = true;
+            foldersToDelete_richTextBox.DragDrop += new DragEventHandler(RichTextBoxExtra.DragDrop_Folder);
+            foldersToDelete_richTextBox.DragEnter += new DragEventHandler(RichTextBoxExtra.DragEnter_File);
+        }
+
+        private void foldersToCompare_richTextBox_TextChanged(object sender, EventArgs e)
+        {
+            FileCustomSugar.Folders_richTextBox_TextChanged(sender, e);
+        }
+
+        private void foldersToDelete_richTextBox_TextChanged(object sender, EventArgs e)
+        {
+            FileCustomSugar.Folders_richTextBox_TextChanged(sender, e);
         }
 
         private void applySettingsToControls()
@@ -53,14 +70,5 @@ namespace FileCustom
                 MessageBox.Show("Error! Settings is empty!");
         }
 
-        private void foldersToCompare_richTextBox_TextChanged(object sender, EventArgs e)
-        {
-            FileCustomSugar.Folders_richTextBox_TextChanged(sender, e);
-        }
-
-        private void foldersToDelete_richTextBox_TextChanged(object sender, EventArgs e)
-        {
-            FileCustomSugar.Folders_richTextBox_TextChanged(sender, e);
-        }
     }
 }
