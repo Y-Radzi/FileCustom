@@ -63,6 +63,7 @@ namespace FileCustom
             { "FindFilesNonUnique_Compare_maximumPathSquareSize", "" },
             { "FindFilesNonUnique_Compare_pictureSquareSize", "" },
             { "FindFilesNonUnique_Compare_showMessageAfterDeleting", "" },
+            { "DeleteEmptyFolders_folders", "" },
         };
 
         public static void Load()

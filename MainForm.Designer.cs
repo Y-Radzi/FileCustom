@@ -32,6 +32,7 @@
             this.FindFilesNonUnique_button = new System.Windows.Forms.Button();
             this.themes_comboBox = new System.Windows.Forms.ComboBox();
             this.theme_label = new System.Windows.Forms.Label();
+            this.DeleteEmptyFolders_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
             // 
             // DeleteFilesIfEquals_button
@@ -72,6 +73,16 @@
             this.theme_label.TabIndex = 4;
             this.theme_label.Text = "Theme";
             // 
+            // DeleteEmptyFolders_button
+            // 
+            this.DeleteEmptyFolders_button.Location = new System.Drawing.Point(306, 53);
+            this.DeleteEmptyFolders_button.Name = "DeleteEmptyFolders_button";
+            this.DeleteEmptyFolders_button.Size = new System.Drawing.Size(234, 33);
+            this.DeleteEmptyFolders_button.TabIndex = 5;
+            this.DeleteEmptyFolders_button.Text = "Delete empty folders";
+            this.DeleteEmptyFolders_button.UseVisualStyleBackColor = true;
+            this.DeleteEmptyFolders_button.Click += new System.EventHandler(this.DeleteEmptyFolders_button_Click);
+            // 
             // MainForm
             // 
             this.AutoScaleDimensions = new System.Drawing.SizeF(9F, 23F);
@@ -80,6 +91,7 @@
             this.AutoSize = true;
             this.AutoSizeMode = System.Windows.Forms.AutoSizeMode.GrowAndShrink;
             this.ClientSize = new System.Drawing.Size(794, 100);
+            this.Controls.Add(this.DeleteEmptyFolders_button);
             this.Controls.Add(this.theme_label);
             this.Controls.Add(this.themes_comboBox);
             this.Controls.Add(this.FindFilesNonUnique_button);
@@ -97,5 +109,6 @@
         private Button FindFilesNonUnique_button;
         private ComboBox themes_comboBox;
         private Label theme_label;
+        private Button DeleteEmptyFolders_button;
     }
 }

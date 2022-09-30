@@ -15,6 +15,13 @@ namespace FileCustom
             themes_comboBox.SelectedIndex = themes_comboBox.Items.IndexOf(FileCustomSettings.Settings["Main_theme"] ?? "Default");
         }
 
+        private void themes_comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        {
+            FileCustomSettings.Settings["Main_theme"] = (themes_comboBox.SelectedItem.ToString() ?? "");
+            FileCustomSettings.Write();
+            FileCustomSettings.SetTheme(this);
+        }
+
         private void DeleteFilesIfEquals_button_Click(object sender, EventArgs e)
         {
             new DeleteFilesIfEquals_Form().Show();
@@ -25,11 +32,9 @@ namespace FileCustom
             new FindFilesNonUnique_Form().Show();
         }
 
-        private void themes_comboBox_SelectedIndexChanged(object sender, EventArgs e)
+        private void DeleteEmptyFolders_button_Click(object sender, EventArgs e)
         {
-            FileCustomSettings.Settings["Main_theme"] = (themes_comboBox.SelectedItem.ToString() ?? "");
-            FileCustomSettings.Write();
-            FileCustomSettings.SetTheme(this);
+            new DeleteEmptyFolders().Show();
         }
     }
 }
