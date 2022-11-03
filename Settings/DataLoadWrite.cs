@@ -1,9 +1,8 @@
-﻿using System.Text;
-using Sugar;
+﻿using Sugar;
 
 namespace FileCustom
 {
-    public static class FileCustomSettings
+    public static partial class FileCustomSettings
     {
         /// <summary>
         /// "Settings_FileCustom.txt"
@@ -13,7 +12,7 @@ namespace FileCustom
         /// <summary>
         /// Encoding.Default
         /// </summary>
-        public static Encoding SettingsEncoding = Encoding.Default;
+        public static System.Text.Encoding SettingsEncoding = System.Text.Encoding.Default;
 
         /// <summary>
         /// ": "
@@ -55,6 +54,9 @@ namespace FileCustom
         /// </summary>
         public static string[] UnallowedSymbolsForFoldersPlainText = new string[] { "\n!", "?", "*", "\"", "'", ">", "<" };
         
+        /// <summary>
+        /// Settings name | value
+        /// </summary>
         public static Dictionary<string, string> Settings = new Dictionary<string, string>() {
             { "Main_theme", "" },
             { "DeleteFilesIfEquals_foldersToCompare", "" },
@@ -68,43 +70,15 @@ namespace FileCustom
 
         public static void Load()
         {
-            Settings = SettingsSimple.Load(Settings, SettingsFileName, SettingsEncoding, SettingsVariableSplitter, SettingsKeySplitter);
+            Settings = Sugar.SettingsSimple.Load(Settings, SettingsFileName, SettingsEncoding, SettingsVariableSplitter, SettingsKeySplitter);
+
+            if (Settings["Main_theme"].IsNullOrEmpty())
+                Settings["Main_theme"] = "Default";
         }
 
         public static void Write()
         {
-            SettingsSimple.Write(Settings, SettingsFileName, SettingsEncoding, SettingsVariableSplitter, SettingsKeySplitter);
+            Sugar.SettingsSimple.Write(Settings, SettingsFileName, SettingsEncoding, SettingsVariableSplitter, SettingsKeySplitter);
         }
-
-        public static void SetTheme(Form form)
-        {
-            var theme = new FileCustomSugar.ThemeStruct();
-            theme.BackColor = SystemColors.Control;
-            theme.ForeColor = SystemColors.ControlText;
-            theme.TextDefaultFont = new Font("Segoe UI", 10F, FontStyle.Regular, GraphicsUnit.Point);
-            theme.FlatStyle = FlatStyle.Standard;
-            theme.BorderColor = SystemColors.ControlText;
-            theme.BorderSize = 1;
-            theme.RichTextBoxBackColor = SystemColors.Window;
-
-            switch (Settings["Main_theme"])
-            {
-                case "Dark":
-                    theme.BackColor = Color.Black;
-                    theme.ForeColor = Color.LawnGreen;
-                    theme.TextDefaultFont = new Font("Consolas", 10F, FontStyle.Regular, GraphicsUnit.Point);
-                    theme.FlatStyle = FlatStyle.Flat;
-                    theme.BorderColor = Color.LawnGreen;
-                    theme.BorderSize = 2;
-                    theme.RichTextBoxBackColor = Color.Black;
-                    break;
-                    
-                default:
-                    break;
-            }
-
-            FileCustomSugar.SetControlTheme(form, theme);
-        }
-
     }
 }

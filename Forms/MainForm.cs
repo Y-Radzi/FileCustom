@@ -1,10 +1,11 @@
 namespace FileCustom
 {
-    public partial class MainForm : Form
+    public partial class MainForm : FileCustomForm
     {
         public MainForm()
         {
             InitializeComponent();
+            InitializeFileCustomForm();
             FileCustomSettings.Load();
             init_themes_comboBox();
         }
@@ -12,7 +13,7 @@ namespace FileCustom
         private void init_themes_comboBox()
         {
             themes_comboBox.Items.AddRange(FileCustomSettings.Themes);
-            themes_comboBox.SelectedIndex = themes_comboBox.Items.IndexOf(FileCustomSettings.Settings["Main_theme"] ?? "Default");
+            themes_comboBox.SelectedIndex = themes_comboBox.Items.IndexOf(FileCustomSettings.Settings["Main_theme"]);
         }
 
         private void themes_comboBox_SelectedIndexChanged(object sender, EventArgs e)
@@ -36,5 +37,6 @@ namespace FileCustom
         {
             new DeleteEmptyFolders().Show();
         }
+
     }
 }

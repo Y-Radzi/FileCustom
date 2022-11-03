@@ -28,6 +28,7 @@
         /// </summary>
         private void InitializeComponent()
         {
+            this.components = new System.ComponentModel.Container();
             this.DeleteFilesIfEquals_button = new System.Windows.Forms.Button();
             this.FindFilesNonUnique_button = new System.Windows.Forms.Button();
             this.themes_comboBox = new System.Windows.Forms.ComboBox();

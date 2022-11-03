@@ -28,11 +28,11 @@
         /// </summary>
         private void InitializeComponent()
         {
-            this.foldersToCompare_richTextBox = new System.Windows.Forms.RichTextBox();
+            this.foldersToCompare_richTextBox = new FileCustomRichTextBox(true, true, true);
             this.foldersToCompare_label = new System.Windows.Forms.Label();
             this.foldersToDelete_label = new System.Windows.Forms.Label();
-            this.foldersToDelete_richTextBox = new System.Windows.Forms.RichTextBox();
-            this.result_richTextBox = new System.Windows.Forms.RichTextBox();
+            this.foldersToDelete_richTextBox = new FileCustomRichTextBox(true, true, true);
+            this.result_richTextBox = new FileCustomRichTextBox(true, false, false);
             this.result_label = new System.Windows.Forms.Label();
             this.go_button = new System.Windows.Forms.Button();
             this.SuspendLayout();
@@ -46,7 +46,6 @@
             this.foldersToCompare_richTextBox.Size = new System.Drawing.Size(911, 137);
             this.foldersToCompare_richTextBox.TabIndex = 1;
             this.foldersToCompare_richTextBox.Text = "";
-            this.foldersToCompare_richTextBox.TextChanged += new System.EventHandler(this.foldersToCompare_richTextBox_TextChanged);
             // 
             // foldersToCompare_label
             // 
@@ -75,7 +74,6 @@
             this.foldersToDelete_richTextBox.Size = new System.Drawing.Size(911, 137);
             this.foldersToDelete_richTextBox.TabIndex = 2;
             this.foldersToDelete_richTextBox.Text = "";
-            this.foldersToDelete_richTextBox.TextChanged += new System.EventHandler(this.foldersToDelete_richTextBox_TextChanged);
             // 
             // result_richTextBox
             // 
@@ -132,11 +130,11 @@
 
         #endregion
 
-        private RichTextBox foldersToCompare_richTextBox;
+        private FileCustomRichTextBox foldersToCompare_richTextBox;
         private Label foldersToCompare_label;
         private Label foldersToDelete_label;
-        private RichTextBox foldersToDelete_richTextBox;
-        private RichTextBox result_richTextBox;
+        private FileCustomRichTextBox foldersToDelete_richTextBox;
+        private FileCustomRichTextBox result_richTextBox;
         private Label result_label;
         private Button go_button;
     }

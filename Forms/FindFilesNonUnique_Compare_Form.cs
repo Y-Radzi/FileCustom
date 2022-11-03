@@ -2,7 +2,7 @@
 
 namespace FileCustom
 {
-    public partial class FindFilesNonUnique_Compare_Form : Form
+    public partial class FindFilesNonUnique_Compare_Form : FileCustomForm
     {
         private Sugar.FileCustom.ComparaisonLogGroup groupFiles = new();
         private bool isSettingsComtrolsActionsDisabled = false;
@@ -10,8 +10,8 @@ namespace FileCustom
         public FindFilesNonUnique_Compare_Form(Sugar.FileCustom.ComparaisonLogGroup groupFilesInput)
         {
             InitializeComponent();
+            InitializeFileCustomForm();
 
-            FileCustomSettings.SetTheme(this);
             showSettings_checkBox_CheckedChanged(null, null);
 
             if (!groupFilesInput.IsEmpty())
@@ -19,30 +19,18 @@ namespace FileCustom
                     if (!element.IsEmpty())
                         groupFiles.Elements.Add(element);
 
-            applySettingsToControls();
+            getApplySettingsToControls(true);
             ifGroupFilesChanged();
             updatePage();
         }
 
-        private void applySettingsToControls()
+        private void getApplySettingsToControls(bool isApply)
         {
             isSettingsComtrolsActionsDisabled = true;
-            if (!FileCustomSettings.Settings["FindFilesNonUnique_Compare_maximumPathSquareSize"].IsNullOrEmpty())
-                maximumPathSquareSize_numericUpDown.Value = Convert.ToDecimal(FileCustomSettings.Settings["FindFilesNonUnique_Compare_maximumPathSquareSize"]);
-
-            if (!FileCustomSettings.Settings["FindFilesNonUnique_Compare_pictureSquareSize"].IsNullOrEmpty())
-                maximumPictureSquareSize_numericUpDown.Value = Convert.ToDecimal(FileCustomSettings.Settings["FindFilesNonUnique_Compare_pictureSquareSize"]);
-
-            if (!FileCustomSettings.Settings["FindFilesNonUnique_Compare_showMessageAfterDeleting"].IsNullOrEmpty())
-                showMessageAfterDeleting_checkBox.Checked = FileCustomSettings.Settings["FindFilesNonUnique_Compare_showMessageAfterDeleting"].ToBool();
+            FileCustomSettings.GetApplyToControl(isApply, "FindFilesNonUnique_Compare_maximumPathSquareSize", maximumPathSquareSize_numericUpDown);
+            FileCustomSettings.GetApplyToControl(isApply, "FindFilesNonUnique_Compare_pictureSquareSize", maximumPictureSquareSize_numericUpDown);
+            FileCustomSettings.GetApplyToControl(isApply, "FindFilesNonUnique_Compare_showMessageAfterDeleting", showMessageAfterDeleting_checkBox);
             isSettingsComtrolsActionsDisabled = false;
-        }
-
-        private void getSettingsFromControls()
-        {
-            FileCustomSettings.Settings["FindFilesNonUnique_Compare_maximumPathSquareSize"] = maximumPathSquareSize_numericUpDown.Value.ToString();
-            FileCustomSettings.Settings["FindFilesNonUnique_Compare_pictureSquareSize"] = maximumPictureSquareSize_numericUpDown.Value.ToString();
-            FileCustomSettings.Settings["FindFilesNonUnique_Compare_showMessageAfterDeleting"] = showMessageAfterDeleting_checkBox.Checked.ToString();
         }
 
         private void ifGroupFilesChanged()
@@ -70,7 +58,7 @@ namespace FileCustom
         private void updatePage()
         {
             main_panel.Controls.Clear();
-            getSettingsFromControls();
+            getApplySettingsToControls(false);
             if (!groupFiles.IsEmpty())
             {
                 var files = groupFiles.Elements[page_numericUpDown.Value.ToInt32() - 1].GetMainAndCompared();
@@ -145,13 +133,17 @@ namespace FileCustom
                     ///////////////////////////////////////////Image
                     if (bitmap != null)
                     {
-                        panel.Controls.Add(new PictureBox()
+                        var pictureBox = new PictureBox()
                         {
                             Size = new Size(pictureSquareSize, pictureSquareSize),
                             SizeMode = PictureBoxSizeMode.Zoom,
                             Name = "pictureBox",
                             Image = bitmap
-                        });
+                        };
+
+                        pictureBox.DoubleClick += new System.EventHandler(openFile);
+
+                        panel.Controls.Add(pictureBox);
                     }
                     panel.AlignChildControlsVertical(FileCustomSettings.DistanceBetweenFormControls);
                     main_panel.Controls.Add(panel);
@@ -160,9 +152,19 @@ namespace FileCustom
             main_panel.AlignChildControlsByMaxSizeGrid(FileCustomSettings.DistanceBetweenFormControls, true);
         }
 
+        private void openFile(object sender, EventArgs e)
+        {
+            using System.Diagnostics.Process fileopener = new System.Diagnostics.Process();
+            string filepath = (sender as PictureBox).Parent.Controls.Find("path_label", false)[0].Text;
+            fileopener.StartInfo.FileName = "explorer.exe";
+            fileopener.StartInfo.Arguments = "\"" + filepath + "\"";
+            fileopener.Start();
+            //MessageBox.Show(filepath);
+        }
+
         private void applyNonLoadableSetting()
         {
-            getSettingsFromControls();
+            getApplySettingsToControls(false);
             int maximumPathSquareSize = FileCustomSettings.Settings["FindFilesNonUnique_Compare_maximumPathSquareSize"].ToInt32();
             int pictureSquareSize = FileCustomSettings.Settings["FindFilesNonUnique_Compare_pictureSquareSize"].ToInt32();
             var newMaxPathSize = new Size(maximumPathSquareSize, maximumPathSquareSize);
@@ -176,22 +178,9 @@ namespace FileCustom
             main_panel.AlignChildControlsByMaxSizeGrid(FileCustomSettings.DistanceBetweenFormControls, true);
         }
 
-        private void selectAllElementsTo(bool isDeleted)
-        {
-            bool delete_RadioButton_value = isDeleted;
-            bool keep_RadioButton_value = !isDeleted;
-
-            foreach (Panel panel in main_panel.Controls)
-            {
-                ((RadioButton)((GroupBox)panel.Controls["groupBox"]).Controls["delete_RadioButton"]).Checked = delete_RadioButton_value;
-                ((RadioButton)((GroupBox)panel.Controls["groupBox"]).Controls["keep_RadioButton"]).Checked = keep_RadioButton_value;
-            }
-        }
-
         private void page_numericUpDown_ValueChanged(object sender, EventArgs e)
         {
             ifGroupFilesChanged();
-            //updatePage();
         }
 
         private void applyActions_button_Click(object sender, EventArgs e)
@@ -268,13 +257,25 @@ namespace FileCustom
         private void showMessageAfterDeleting_checkBox_CheckedChanged(object sender, EventArgs e)
         {
             if (!isSettingsComtrolsActionsDisabled)
-                getSettingsFromControls();
+                getApplySettingsToControls(false);
         }
 
         private void saveSettings_button_Click(object sender, EventArgs e)
         {
-            getSettingsFromControls();
+            getApplySettingsToControls(false);
             FileCustomSettings.Write();
+        }
+
+        private void selectAllElementsTo(bool isDeleted)
+        {
+            bool delete_RadioButton_value = isDeleted;
+            bool keep_RadioButton_value = !isDeleted;
+
+            foreach (Panel panel in main_panel.Controls)
+            {
+                ((RadioButton)((GroupBox)panel.Controls["groupBox"]).Controls["delete_RadioButton"]).Checked = delete_RadioButton_value;
+                ((RadioButton)((GroupBox)panel.Controls["groupBox"]).Controls["keep_RadioButton"]).Checked = keep_RadioButton_value;
+            }
         }
 
         private void SelectAllKeep_button_Click(object sender, EventArgs e)

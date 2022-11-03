@@ -2,7 +2,7 @@
 
 namespace FileCustom
 {
-    public partial class FindFilesNonUnique_Form : Form
+    public partial class FindFilesNonUnique_Form : FileCustomForm
     {
         Sugar.FileCustom.ComparaisonLogOutput logOutput = new();
         string keyCompared = "keyCompared";
@@ -10,30 +10,19 @@ namespace FileCustom
         public FindFilesNonUnique_Form()
         {
             InitializeComponent();
-            FileCustomSettings.SetTheme(this);
-            applySettingsToControls();
-            folders_richTextBox.AddDefaultShortContextMenu();
-            result_richTextBox.AddDefaultShortContextMenu();
-
-            folders_richTextBox.AllowDrop = true;
-            folders_richTextBox.DragDrop += new DragEventHandler(RichTextBoxExtra.DragDrop_Folder);
-            folders_richTextBox.DragEnter += new DragEventHandler(RichTextBoxExtra.DragEnter_File);
+            InitializeFileCustomForm();
+            getApplySettingsToControls(true);
         }
 
-        private void applySettingsToControls()
+        private void getApplySettingsToControls(bool isApply)
         {
-            folders_richTextBox.Text = FileCustomSettings.Settings["FindFilesNonUnique_Folders"];
-        }
-
-        private void getSettingsFromControls()
-        {
-            FileCustomSettings.Settings["FindFilesNonUnique_Folders"] = folders_richTextBox.Text;
+            FileCustomSettings.GetApplyToControl(isApply, "FindFilesNonUnique_Folders", folders_richTextBox);
         }
 
         private void go_button_Click(object sender, EventArgs e)
         {
             result_richTextBox.Text = "";
-            getSettingsFromControls();
+            getApplySettingsToControls(false);
             logOutput = new Sugar.FileCustom.ComparaisonLogOutput();
 
             if (!FileCustomSettings.Settings.IsNullOrEmpty())
@@ -59,11 +48,6 @@ namespace FileCustom
         {
             if (logOutput.Groups.ContainsKey(keyCompared))
                 new FindFilesNonUnique_Compare_Form(logOutput.Groups[keyCompared]).Show();
-        }
-
-        private void folders_richTextBox_TextChanged(object sender, EventArgs e)
-        {
-            FileCustomSugar.Folders_richTextBox_TextChanged(sender, e);
         }
     }
 }
